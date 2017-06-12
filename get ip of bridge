@@ -1,0 +1,9 @@
+>>> import urllib.request, json
+>>> with urllib.request.urlopen(r"https://www.meethue.com/api/nupnp") as url:
+...  data = json.loads(url.read().decode())
+...
+>>> data
+[{'id': '001788fffe20baa9', 'internalipaddress': '10.0.0.2'}]
+>>> internalipaddress = data[0]['internalipaddress']
+>>> internalipaddress
+'10.0.0.2'
