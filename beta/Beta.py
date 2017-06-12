@@ -1,5 +1,5 @@
-import light.py
-import sound.py
+import light
+import sound
 import cv2
 import sys
 from datetime import datetime
@@ -15,14 +15,20 @@ FaceTime = 0
 FaceRatio = 0
 diff = 0
 Power = 0
+curr = 0
 
 while 1:
     now = datetime.now()
     # Create the haar cascade xml file
     faceCascade = cv2.CascadeClassifier(cascPath)
 
-    # Read the image
-    _, image = cap.read()
+    # Read        # Loop until the camera is working
+    rval = False
+    while(not rval):
+        # Read the image
+        (rval,image) = cap.read()
+        if(not rval):
+            print("Failed to open webcam. Trying again...")
 
     gray = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
 
@@ -40,7 +46,7 @@ while 1:
         Power = 0
     if( len(faces) != 0 ):
         if( Power == 5 ):
-            change_sound(1, 1, 1 )
+            sound.change_sound(1, 1, 1 )
         if( FaceRatio < len(faces)):
             diff = len(faces) - FaceRatio
             #send diff to mongoDB
@@ -50,7 +56,7 @@ while 1:
         FaceTime += FaceRatio
         Power += len(faces)
         #if there r faces activate light
-        curr = change_light(0, power, 0 )
+        curr = light.change_light(0, Power, 0 )
         # Timestamp in txt
         file.write(now.strftime('%Y-%m-%d %H:%M ->\n'))
         # current num of faces in txt
