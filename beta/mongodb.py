@@ -28,7 +28,7 @@ def main():
 
     cursor = emotions.find({'id': 1})
     for doc in cursor:
-        print('%s' % doc['name']
+        print('%s' % doc['name'])
     
     #for doc in cursor:
         #print ('there was %s in id: %s and measure is %s ' %
