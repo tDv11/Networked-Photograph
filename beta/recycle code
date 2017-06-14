@@ -1,0 +1,23 @@
+    #print("Found {0} faces!".format(len(faces)))
+    if( Power >= 250 ):
+        Power = 0
+    if( len(faces) != 0 ):
+        if( Power == 5 ):
+            sound.change_sound(1, 1, 1 )
+        if( FaceRatio < len(faces)):
+            diff = len(faces) - FaceRatio
+
+
+            
+        # Add the current num of faces to the existing count
+        FaceRatio = len(faces)
+        FaceTime += FaceRatio
+        Power += len(faces)
+
+
+    if ( flag ==0 ):
+        power = curr - stage
+    else:
+        power = curr + stage
+    b.set_light(1, 'bri', power)
+    return power
