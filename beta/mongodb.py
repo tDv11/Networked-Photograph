@@ -17,25 +17,27 @@ def main():
 
     db = client['net_photographs']
 
-    emotions = db.emotions
+    simulation = db.simulation
 
     #emotions.insert_many(SEED_DATA)
 
     query = {'id': 1}
 
     
-    emotions.update(query, {'$set': {'name': 'success'}})
+    #simulation.update(query, {'$set': {'lightPower': 1}})
 
-    cursor = emotions.find({'id': 1})
+    cursor = simulation.find({'id': 1})
     
-    print(cursor)
+    #print(cursor)
     
     for doc in cursor:
-        print ('there was %s in id: %s and measure is %s ' %
-               (doc['name'], doc['id'], doc['measure']))
+        print (  doc['id'], doc['faceTime'], doc['lightPower'], doc['prevLightPower'], doc['faces'], doc['prevFaces'], )
 
     #db.drop_collection('emotions')
     client.close()
 
 
 main()
+
+
+

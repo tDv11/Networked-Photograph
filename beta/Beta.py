@@ -2,8 +2,16 @@ import light
 import rwfile
 import cv2
 import pygame
+import pymongo
+import sys
 
 cascPath = "haarcascade_frontalface_default.xml"
+
+uri = 'mongodb://net_photo:net.photo456@ds111771.mlab.com:11771/net_photographs'
+client = pymongo.MongoClient(uri)
+db = client['net_photographs']
+simulation = db.simulation
+myphotoid = {'id': 1}
 
 file = open("output.txt","w")
 
@@ -20,7 +28,7 @@ prevpower = 0
 soundtime = 0
 
 volum = 0.05
-volumjump = 0.16
+volumjump = 0.125
 try:
   while True:
     # Create the haar cascade xml file
@@ -45,18 +53,29 @@ try:
     # flags = cv2.CV_HAAR_SCALE_IMAGE
         )
 
-    #send diff to mongoDB print('difference :' + str(diff))
     
-    if( len(faces) > 0 ): #if there r faces
-        facetime += len(faces)
-        soundtime += len(faces)
-        # call light func that deside light power
-        light.change_light(prevfaces,len(faces),prevpower)
 
-        #if no recording is on, play
+    facetime += len(faces)
+    simulation.update(myphotoid, {'$set': {'faceTime': facetime}})
+    soundtime += len(faces)
+
+    simulation.update(myphotoid, {'$set': {'prevLightPower': prevpower}})
+        
+    # call light func that deside light power
+    light.change_light(prevfaces,len(faces),prevpower)
+        
+
+    #simulation.update(myphotoid, {'$set': {'lightPower': power}})
+    simulation.update(myphotoid, {'$set': {'faces': len(faces)}})
+    simulation.update(myphotoid, {'$set': {'prevFaces': prevfaces}})
+        
+
+    #if no recording is on, play
+    if( len(faces) > 0 ):
         if( pygame.mixer.music.get_busy() == 0 ):
             pygame.mixer.music.play()
         #calculate volum power
+        simulation.update(myphotoid, {'$set': {'prevSoundPower': volum}})
         volum = len(faces) * volumjump
         #logs
         rwfile.rw_file(faces,facetime,file)
@@ -64,6 +83,7 @@ try:
         # Draw a rectangle around the faces
         for (x, y, w, h) in faces:
             cv2.rectangle(image, (x, y), (x+w, y+h), (0, 255, 0), 2)
+
     #if volum pass max calibrate      
     if( volum >1.0 ):
         volum = 1.0
@@ -71,6 +91,7 @@ try:
     if( len(faces) == 0 ):
         volum = 0.05
     pygame.mixer.music.set_volume(volum)
+    simulation.update(myphotoid, {'$set': {'soundPower': volum}})
 
     cv2.imshow("Faces found", image)
     k = cv2.waitKey(1) & 0xFF
@@ -79,7 +100,7 @@ try:
 except KeyboardInterrupt:
     pass
 
-
+client.close()
 cv2.destroyAllWindows()
 cap.release()
 file.close()
