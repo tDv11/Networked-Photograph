@@ -41,4 +41,17 @@ def main():
 main()
 
 
-
+Traceback (most recent call last):
+  File "/home/pi/FaceTrack-Master/beta/mongodb.py", line 41, in <module>
+    main()
+  File "/home/pi/FaceTrack-Master/beta/mongodb.py", line 30, in main
+    for doc in cursor:
+  File "/usr/local/lib/python3.4/dist-packages/pymongo/cursor.py", line 1114, in next
+    if len(self.__data) or self._refresh():
+  File "/usr/local/lib/python3.4/dist-packages/pymongo/cursor.py", line 1036, in _refresh
+    self.__collation))
+  File "/usr/local/lib/python3.4/dist-packages/pymongo/cursor.py", line 928, in __send_message
+    helpers._check_command_response(doc['data'][0])
+  File "/usr/local/lib/python3.4/dist-packages/pymongo/helpers.py", line 210, in _check_command_response
+    raise OperationFailure(msg % errmsg, code, response)
+pymongo.errors.OperationFailure: not authorized on emotions to execute command { find: "emotions", filter: { id: 1 } }
