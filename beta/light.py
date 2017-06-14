@@ -16,17 +16,17 @@ def change_light( prevfaces, curr, prevpower):
     #philips hue light connection
     b = Bridge(ip)
     #b.connect()
-    power = 0
+    power = 60
     diff = 0
     
     if( prevfaces > curr ):
         diff = prevfaces - curr
-        power = jump * ( prevpower - diff )
+        power += jump * ( prevpower - diff )
 
 
     if ( prevfaces < curr ):
         diff = curr - prevfaces
-        power = jump * ( curr + diff )
+        power += jump * ( curr + diff )
         
     if( power > 254 ):
         power = 254
