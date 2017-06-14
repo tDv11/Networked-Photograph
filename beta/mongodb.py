@@ -34,7 +34,7 @@ def main():
         print ('there was %s in id: %s and measure is %s ' %
                (doc['name'], doc['id'], doc['measure']))
 
-    db.drop_collection('emotions')
+    #db.drop_collection('emotions')
     client.close()
 
 
