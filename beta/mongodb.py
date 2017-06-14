@@ -26,9 +26,9 @@ def main():
     
     #emotions.update({'id' : 1}, {'$set': {'name': 'success'}})
 
-    cursor = emotions.find({'id': {1}})
+    cursor = emotions.find({'id': 1})
     for doc in cursor:
-        print(doc)
+        print('%s' % doc['name']
     
     #for doc in cursor:
         #print ('there was %s in id: %s and measure is %s ' %
