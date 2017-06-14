@@ -36,10 +36,10 @@ try:
 
     # Loop until the camera is working
     rval = False
-    while(not rval):
+    while not rval:
         # Read the image
         (rval,image) = cap.read()
-        if(not rval):
+        if not rval :
             print("Failed to open webcam. Trying again...")
 
     gray = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
@@ -71,8 +71,8 @@ try:
         
 
     #if no recording is on, play
-    if( len(faces) > 0 ):
-        if( pygame.mixer.music.get_busy() == 0 ):
+    if len(faces) > 0 :
+        if pygame.mixer.music.get_busy() == 0 :
             pygame.mixer.music.play()
         #calculate volum power
         simulation.update(myphotoid, {'$set': {'prevSoundPower': volum}})
@@ -85,10 +85,10 @@ try:
             cv2.rectangle(image, (x, y), (x+w, y+h), (0, 255, 0), 2)
 
     #if volum pass max calibrate      
-    if( volum >1.0 ):
+    if volum >1.0 :
         volum = 1.0
     #if no faces calibrate
-    if( len(faces) == 0 ):
+    if len(faces) == 0 :
         volum = 0.05
     pygame.mixer.music.set_volume(volum)
     simulation.update(myphotoid, {'$set': {'soundPower': volum}})
