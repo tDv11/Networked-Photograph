@@ -56,7 +56,7 @@ def main():
         # flags = cv2.CV_HAAR_SCALE_IMAGE
             )
         
-        # call light func that deside light power
+        # call light func with the photo's properties
         ( prev_faces, prev_power ) = light.change_light(prev_faces,len(faces),prev_power)    
         
         # to do if there are ppl
