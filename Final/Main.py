@@ -10,11 +10,13 @@ import log
 
 def main():
     CASC_PATH = "haarcascade_frontalface_default.xml"
-    uri = 'mongodb://net_photo:net.photo456@ds111771.mlab.com:11771/net_photographs'
-    client = pymongo.MongoClient(uri)
+    URI = 'mongodb://net_photo:net.photo456@ds111771.mlab.com:11771/net_photographs'
+    
+    client = pymongo.MongoClient(URI)
     db = client['net_photographs']
     simulation = db.simulation
     my_photo_id = {'id': 1}
+    
 
     my_file = open("log.txt", "w")  
 
@@ -30,7 +32,8 @@ def main():
     prev_power = 0
     sound_time = 0
 
-    volum = 0.05  
+    min_volum = volum = 0.05
+    max_volum = 1.0
     volum_jump = 0.125
     try:
         while True:
@@ -80,10 +83,11 @@ def main():
                 cv2.rectangle(image, (x, y), (x+w, y+h), (0, 255, 0), 2)
 
         # calibrate if overflow      
-        if volum >1.0 :
-            volum = 1.0
-        if len(faces) == 0 :
-            volum = 0.05
+        if volum > max_volum :
+            volum = max_voum
+        if volum < min_volum :
+            volum = min_volum
+        
         pygame.mixer.music.set_volume(volum)
 
         cv2.imshow("Faces found", image)
