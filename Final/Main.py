@@ -14,7 +14,7 @@ def main():
     client = pymongo.MongoClient(uri)
     db = client['net_photographs']
     simulation = db.simulation
-    myphotoid = {'id': 1}
+    my_photo_id = {'id': 1}
 
     my_file = open("log.txt", "w")  
 
@@ -25,10 +25,10 @@ def main():
     pygame.mixer.init()
     pygame.mixer.music.load("first photo FOOD.mp3")
 
-    facetime = 0
-    prevfaces = 0
-    prevpower = 0
-    soundtime = 0
+    face_time = 0
+    prev_faces = 0
+    prev_power = 0
+    sound_time = 0
 
     volum = 0.05  # CR: `volum` => `volume`
     volumjump = 0.125
@@ -57,7 +57,7 @@ def main():
             )
         
         # call light func that deside light power
-        light.change_light(prevfaces,len(faces),prevpower)    
+        ( prev_faces, prev_power ) = light.change_light(prev_faces,len(faces),prev_power)    
         
         # to do if there are ppl
         if len(faces) > 0 :
@@ -65,6 +65,7 @@ def main():
             if pygame.mixer.music.get_busy() == 0 :
                 pygame.mixer.music.play()
            
+            # update curr faces on db + inc FaceTime but the curr faces
             simulation.update(myphotoid, {'$set': {'faces': len(faces)}})
             simulation.findOneAndUpdate( myphotoid, { $inc: { "faceTime" : len(faces) } } )
             
@@ -72,7 +73,7 @@ def main():
             volum = len(faces) * volumjump
             soundtime += len(faces)
             # logs
-            rwfile.rw_file(faces,facetime,file)
+            rwfile.rw_file(faces,facetime,my_file)
        
             # draw a rectangle around the faces
             for (x, y, w, h) in faces:
