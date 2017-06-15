@@ -30,12 +30,12 @@ def main():
     prev_power = 0
     sound_time = 0
 
-    volum = 0.05  # CR: `volum` => `volume`
-    volumjump = 0.125
+    volum = 0.05  
+    volum_jump = 0.125
     try:
         while True:
         # Create the haar cascade xml file
-        faceCascade = cv2.CascadeClassifier(CASC_PATH)
+        face_cascade = cv2.CascadeClassifier(CASC_PATH)
 
         # Loop until the camera is working
         rval = False
@@ -48,7 +48,7 @@ def main():
         gray = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
 
         # Detect faces in the image
-        faces = faceCascade.detectMultiScale(
+        faces = face_cascade.detectMultiScale(
         gray,
         scaleFactor=1.1,
         minNeighbors=5,
@@ -66,23 +66,22 @@ def main():
                 pygame.mixer.music.play()
            
             # update curr faces on db + inc FaceTime but the curr faces
-            simulation.update(myphotoid, {'$set': {'faces': len(faces)}})
-            simulation.findOneAndUpdate( myphotoid, { $inc: { "faceTime" : len(faces) } } )
+            simulation.update(my_photo_id, {'$set': {'faces': len(faces)}})
+            simulation.findOneAndUpdate( my_photo_id, { $inc: { "faceTime" : len(faces) } } )
             
             # calculate volume power
-            volum = len(faces) * volumjump
-            soundtime += len(faces)
+            volum = len(faces) * volum_jump
+            sound_time += len(faces)
             # logs
-            log.log(faces,facetime,my_file)
+            log.log(faces,face_time,my_file)
        
             # draw a rectangle around the faces
             for (x, y, w, h) in faces:
                 cv2.rectangle(image, (x, y), (x+w, y+h), (0, 255, 0), 2)
 
-        # if volume pass max calibrate      
+        # calibrate if overflow      
         if volum >1.0 :
             volum = 1.0
-        # if no faces calibrate
         if len(faces) == 0 :
             volum = 0.05
         pygame.mixer.music.set_volume(volum)
@@ -97,7 +96,7 @@ def main():
     client.close()
     cv2.destroyAllWindows()
     cap.release()
-    file.close()
+    my_file.close()
     
 if __name__ == '__main__':
     main()
