@@ -6,7 +6,7 @@ import pygame
 import pymongo
 
 import light
-import rwfile
+import log
 
 def main():
     CASC_PATH = "haarcascade_frontalface_default.xml"
@@ -73,7 +73,7 @@ def main():
             volum = len(faces) * volumjump
             soundtime += len(faces)
             # logs
-            rwfile.rw_file(faces,facetime,my_file)
+            log.log(faces,facetime,my_file)
        
             # draw a rectangle around the faces
             for (x, y, w, h) in faces:
