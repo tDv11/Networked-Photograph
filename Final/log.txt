@@ -1,0 +1,121 @@
+2017-06-19 11:02 ->
+Faces Detected=[[94 73 91 91]]
+Face Time=1seconds
+¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬
+2017-06-19 11:02 ->
+Faces Detected=[[125  77  92  92]]
+Face Time=2seconds
+¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬
+2017-06-19 11:02 ->
+Faces Detected=[[98 60 99 99]]
+Face Time=3seconds
+¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬
+2017-06-19 11:02 ->
+Faces Detected=[[147 110 120 120]]
+Face Time=4seconds
+¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬
+2017-06-19 11:02 ->
+Faces Detected=[[242  79  53  53]
+ [ 46  47 106 106]]
+Face Time=6seconds
+¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬
+2017-06-19 11:02 ->
+Faces Detected=[[ 80  54 106 106]]
+Face Time=7seconds
+¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬
+2017-06-19 11:03 ->
+Faces Detected=[[ 54  57 100 100]]
+Face Time=8seconds
+¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬
+2017-06-19 11:03 ->
+Faces Detected=[[ 60  54 103 103]]
+Face Time=9seconds
+¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬
+2017-06-19 11:03 ->
+Faces Detected=[[ 68  51 106 106]]
+Face Time=10seconds
+¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬
+2017-06-19 11:03 ->
+Faces Detected=[[ 72  53 109 109]]
+Face Time=11seconds
+¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬
+2017-06-19 11:03 ->
+Faces Detected=[[ 74  56 106 106]]
+Face Time=12seconds
+¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬
+2017-06-19 11:03 ->
+Faces Detected=[[ 75  57 105 105]]
+Face Time=13seconds
+¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬
+2017-06-19 11:03 ->
+Faces Detected=[[ 72  55 109 109]]
+Face Time=14seconds
+¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬
+2017-06-19 11:03 ->
+Faces Detected=[[ 73  58 100 100]]
+Face Time=15seconds
+¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬
+2017-06-19 11:03 ->
+Faces Detected=[[ 74  58 101 101]]
+Face Time=16seconds
+¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬
+2017-06-19 11:03 ->
+Faces Detected=[[ 73  57 106 106]]
+Face Time=17seconds
+¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬
+2017-06-19 11:03 ->
+Faces Detected=[[ 80  62 100 100]]
+Face Time=18seconds
+¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬
+2017-06-19 11:03 ->
+Faces Detected=[[ 79  65 103 103]]
+Face Time=19seconds
+¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬
+2017-06-19 11:03 ->
+Faces Detected=[[ 83  68 100 100]]
+Face Time=20seconds
+¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬
+2017-06-19 11:03 ->
+Faces Detected=[[83 69 99 99]]
+Face Time=21seconds
+¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬
+2017-06-19 11:03 ->
+Faces Detected=[[148  72 111 111]]
+Face Time=22seconds
+¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬
+2017-06-19 11:03 ->
+Faces Detected=[[108  79 107 107]]
+Face Time=23seconds
+¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬
+2017-06-19 11:03 ->
+Faces Detected=[[106  60 113 113]]
+Face Time=24seconds
+¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬
+2017-06-19 11:03 ->
+Faces Detected=[[112  65 110 110]]
+Face Time=25seconds
+¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬
+2017-06-19 11:03 ->
+Faces Detected=[[108  66 111 111]]
+Face Time=26seconds
+¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬
+2017-06-19 11:03 ->
+Faces Detected=[[112  67 108 108]]
+Face Time=27seconds
+¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬
+2017-06-19 11:03 ->
+Faces Detected=[[114  67 110 110]]
+Face Time=28seconds
+¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬
+2017-06-19 11:03 ->
+Faces Detected=[[112  67 110 110]]
+Face Time=29seconds
+¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬
+2017-06-19 11:03 ->
+Faces Detected=[[107  65 113 113]]
+Face Time=30seconds
+¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬
+2017-06-19 11:03 ->
+Faces Detected=[[ 99  58 106 106]]
+Face Time=31seconds
+¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬
