@@ -11,7 +11,7 @@ from phue import Bridge
 def change_light( prev_faces, curr, prev_power):
       
     # photo attributes
-    JUMP = 21
+    JUMP = 53
     max_power = 254  
     min_power = 60
     light_id = 1
