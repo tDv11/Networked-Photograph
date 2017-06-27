@@ -11,10 +11,10 @@ from phue import Bridge
 def change_light( prev_faces, curr, prev_power):
       
     # photo attributes
-    JUMP = 25
+    JUMP = 53
     max_power = 254  
-    min_power = 51
-    light_id = 2
+    min_power = 60
+    light_id = 1
     
     # read bridge ip from web
     with urllib.request.urlopen(r"https://www.meethue.com/api/nupnp") as url:
@@ -29,20 +29,23 @@ def change_light( prev_faces, curr, prev_power):
         except PhueRegistrationException :
             print('please press connect button on bridge')
     
-    power = 0
+    power = min_power
     diff = 0
     
     if prev_faces > curr :
         diff = prev_faces - curr
-        power = JUMP * (prev_power - diff)
+        
 
     if  prev_faces < curr :
         diff = curr - prev_faces
-        power = JUMP * (curr + diff)
+
     
-    # calibrate if overflow    
+    
+    power += ( JUMP * curr ) 
+    
+    # calibrate if overflow
     if power > max_power :
-        power = max_power
+        power = 125
     if power < min_power :
         power = min_power
     
