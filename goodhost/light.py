@@ -29,18 +29,21 @@ def change_light( prev_faces, curr, prev_power):
         except PhueRegistrationException :
             print('please press connect button on bridge')
     
-    power = 0
+    power = min_power
     diff = 0
     
     if prev_faces > curr :
         diff = prev_faces - curr
-        power = JUMP * (prev_power - diff)
+        
 
     if  prev_faces < curr :
         diff = curr - prev_faces
-        power = JUMP * (curr + diff)
+
     
-    # calibrate if overflow    
+    
+    power += ( JUMP * curr ) 
+    
+    # calibrate if overflow
     if power > max_power :
         power = 125
     if power < min_power :
