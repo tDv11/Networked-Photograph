@@ -76,7 +76,7 @@ def main():
            
                 # update curr faces on db + inc FaceTime but the curr faces
                 simulation.update(my_photo_id, {'$set': {'faces': len(faces)}})
-                simulation.update(my_photo_id, {'$set': {'faceTime': face_counter}})
+                simulation.update(my_photo_id, {'$set': {'faceTime': face_time}})
             
                 # calculate volume power
                 volum = len(faces) * volum_jump
