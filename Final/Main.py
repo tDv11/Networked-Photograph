@@ -28,18 +28,13 @@ def main():
     pygame.mixer.music.load("first photo FOOD.mp3")
 
     face_time = 0
-    # init face_time from DB
-    cursor = simulation.find( my_photo_id )
-    for doc in cursor:
-        face_time = doc['faceTime']
-    
     prev_faces = 0
     prev_power = 0
     sound_time = 0
 
     min_volum = volum = 0.05
     max_volum = 1.0
-    volum_jump = 0.16
+    volum_jump = 0.125
     try:
         while True:
             # Create the haar cascade xml file
@@ -76,11 +71,11 @@ def main():
            
                 # update curr faces on db + inc FaceTime but the curr faces
                 simulation.update(my_photo_id, {'$set': {'faces': len(faces)}})
-                simulation.update(my_photo_id, {'$set': {'faceTime': face_time}})
+                #simulation.findOneAndUpdate( my_photo_id, {'$inc': {"faceTime": len(faces) } } )
             
                 # calculate volume power
                 volum = len(faces) * volum_jump
-
+                sound_time += len(faces)
                 # logs
                 log.log(faces,face_time,my_file)
        

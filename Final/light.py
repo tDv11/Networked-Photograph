@@ -11,7 +11,7 @@ from phue import Bridge
 def change_light( prev_faces, curr, prev_power):
       
     # photo attributes
-    JUMP = 19  
+    JUMP = 21
     max_power = 254  
     min_power = 60
     light_id = 1
@@ -42,7 +42,7 @@ def change_light( prev_faces, curr, prev_power):
     
     # calibrate if overflow    
     if power > max_power :
-        power = max_power
+        power = 125
     if power < min_power :
         power = min_power
     
