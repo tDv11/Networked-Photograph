@@ -11,9 +11,9 @@ from phue import Bridge
 def change_light( prev_faces, curr, prev_power):
       
     # photo attributes
-    JUMP = 53
+    JUMP = 25
     max_power = 254  
-    min_power = 60
+    min_power = 76
     light_id = 1
     
     # read bridge ip from web
