@@ -45,7 +45,7 @@ def change_light( prev_faces, curr, prev_power):
     
     # calibrate if overflow
     if power > max_power :
-        power = 125
+        power = max_power
     if power < min_power :
         power = min_power
     
