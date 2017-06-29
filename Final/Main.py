@@ -10,12 +10,12 @@ import log
 
 def main():
     CASC_PATH = "haarcascade_frontalface_default.xml"
-    URI = 'mongodb://net_photo:net.photo456@ds111771.mlab.com:11771/net_photographs'
+    URI = 'mongodb://net_photo:net.photo456@ds139322.mlab.com:39322/net_photographs'
     
     client = pymongo.MongoClient(URI)
     db = client['net_photographs']
-    simulation = db.simulation
-    my_photo_id = {'id': 1}
+    simulation = db.photographs
+    my_photo_id = {'id': 2}
     
 
     my_file = open("log.txt", "w")  
@@ -31,7 +31,7 @@ def main():
     # init face_time from DB
     cursor = simulation.find( my_photo_id )
     for doc in cursor:
-        face_time = doc['faceTime']
+        face_time = doc['accumulateViewersPerDay']
     
     prev_faces = 0
     prev_power = 0
@@ -65,7 +65,9 @@ def main():
                 )
         
             # call light func with the photo's properties
-            ( prev_faces, prev_power ) = light.change_light(prev_faces,len(faces),prev_power)    
+            ( prev_faces, prev_power ) = light.change_light(prev_faces,len(faces),prev_power)
+            simulation.update(my_photo_id, {'$set': {'currentLightning': prev_power}})
+            
         
             # to do if there are ppl
             if len(faces) > 0 :
@@ -75,14 +77,16 @@ def main():
                     pygame.mixer.music.play()
            
                 # update curr faces on db + inc FaceTime but the curr faces
-                simulation.update(my_photo_id, {'$set': {'faces': len(faces)}})
-                simulation.update(my_photo_id, {'$set': {'faceTime': face_time}})
+                simulation.update(my_photo_id, {'$set': {'currentViewrs': len(faces)}})
+                simulation.update(my_photo_id, {'$set': {'accumulateViewersPerDay': face_time}})
+                
             
                 # calculate volume power
                 volum = len(faces) * volum_jump
 
                 # logs
-                log.log(faces,face_time,my_file)
+                lastUpdate = log.log(faces,face_time,my_file)
+                simulation.update(my_photo_id, {'$set': {'lastUpdate': lastUpdate }})
        
                 # draw a rectangle around the faces
                 for (x, y, w, h) in faces:

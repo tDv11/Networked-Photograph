@@ -11,3 +11,4 @@ def log(faces, face_time, my_file):
     # num of faces so far in txt
     my_file.write('Face Time={0}seconds\n'.format(face_time))
     my_file.write('¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬\n')
+    return now.strftime('%H:%M')
