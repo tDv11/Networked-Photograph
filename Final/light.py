@@ -26,7 +26,7 @@ def change_light( prev_faces, curr, prev_power):
         try:
           b = Bridge(ip)
           break  
-        except PhueRegistrationException :
+        except phue.PhueRegistrationException :
             print('please press connect button on bridge')
     
     power = min_power
@@ -41,7 +41,7 @@ def change_light( prev_faces, curr, prev_power):
 
     
     
-    power += ( JUMP *  (curr/2) )
+    power += ( JUMP *  (curr) )
     
     
     # calibrate if overflow
