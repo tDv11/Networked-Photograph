@@ -1,6 +1,6 @@
-import json
+
 import sys
-import urllib.request
+import urllib.request, json
 import phue
 
 import cv2
