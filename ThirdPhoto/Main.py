@@ -25,7 +25,7 @@ def main():
     cap.set(4, 240)
 
     pygame.mixer.init()
-    pygame.mixer.music.load("3 not so miscellany.")
+    pygame.mixer.music.load("3 not so miscellany.mp3")
 
     face_time = 0
     # init face_time from DB
