@@ -14,7 +14,7 @@ def main():
     
     client = pymongo.MongoClient(URI)
     db = client['net_photographs']
-    simulation = db.session
+    simulation = db.sessions
     my_photo_id = {'photoID': 3}
     
 
@@ -25,7 +25,7 @@ def main():
     cap.set(4, 240)
 
     pygame.mixer.init()
-    pygame.mixer.music.load("first photo FOOD.mp3")
+    pygame.mixer.music.load("3 not so miscellany.")
 
     face_time = 0
     # init face_time from DB
