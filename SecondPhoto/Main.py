@@ -89,8 +89,8 @@ def main():
                 simulation.update(my_photo_id, {'$set': {'lastUpdate': lastUpdate }})
        
                 # draw a rectangle around the faces
-                for (x, y, w, h) in faces:
-                    cv2.rectangle(image, (x, y), (x+w, y+h), (0, 255, 0), 2)
+                #for (x, y, w, h) in faces:
+                    #cv2.rectangle(image, (x, y), (x+w, y+h), (0, 255, 0), 2)
 
             # calibrate if overflow      
             if volum > max_volum :
@@ -100,7 +100,7 @@ def main():
         
             pygame.mixer.music.set_volume(volum)
 
-            cv2.imshow("Faces found", image)
+            #cv2.imshow("Faces found", image)
             k = cv2.waitKey(1) & 0xFF
             if k == 27:
                 break
