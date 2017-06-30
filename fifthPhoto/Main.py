@@ -14,7 +14,7 @@ def main():
     
     client = pymongo.MongoClient(URI)
     db = client['net_photographs']
-    simulation = db.session
+    simulation = db.sessions
     my_photo_id = {'photoID': 5}
     my_friend_id = {'photoID': 2}
 
@@ -25,7 +25,7 @@ def main():
     cap.set(4, 240)
 
     pygame.mixer.init()
-    pygame.mixer.music.load("first photo FOOD.mp3")
+    pygame.mixer.music.load("5 mathematics.mp3")
 
     face_time = 0
     # init face_time from DB
@@ -68,7 +68,7 @@ def main():
 
             cursor_friend = simulation.find( my_friend_id )
             for doc in cursor_friend:
-                my_friend_faces = doc['currentViewrs']
+                my_friend_faces = doc['currentViewers']
             
             # call light func with the photo's properties
             ( prev_faces, prev_power ) = light.change_light(prev_faces,(len(faces)+(my_friend_faces/2)) ,prev_power)
