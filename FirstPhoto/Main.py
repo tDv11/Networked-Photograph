@@ -14,7 +14,7 @@ def main():
     
     client = pymongo.MongoClient(URI)
     db = client['net_photographs']
-    simulation = db.session
+    simulation = db.sessions
     my_photo_id = {'photoID': 1}
     
 
