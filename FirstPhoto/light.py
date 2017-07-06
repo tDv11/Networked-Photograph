@@ -1,24 +1,21 @@
+
 import sys
-import cv2
 
 import phue
-from phue import Bridge
-import urllib.request, json
 
-# read bridge ip from web
-with urllib.request.urlopen(r"https://www.meethue.com/api/nupnp") as url:
-    data = json.loads(url.read().decode())
-    ip = data[0]['internalipaddress']
-    
-def change_light( prev_faces, curr, prev_power):
+import cv2
+from phue import Bridge
+
+
+
+def change_light( prev_faces, curr, prev_power, ip):
       
     # photo attributes
     JUMP = 53
     max_power = 254  
-    min_power = 60
+    min_power = 0
     light_id = 1
     
-
     
     # philips hue light connection
     while True:
@@ -51,7 +48,7 @@ def change_light( prev_faces, curr, prev_power):
 
     # change light power
     b.set_light(light_id, 'bri', int(power))
-
+    print(power)
     prev_power = power
     prev_faces = curr
     
