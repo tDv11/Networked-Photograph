@@ -15,6 +15,7 @@ def main():
     client = pymongo.MongoClient(URI)
     db = client['net_photographs']
     simulation = db.sessions
+    config = db.config
     my_photo_id = {'photoID': 11}
     
 
@@ -32,7 +33,12 @@ def main():
     cursor = simulation.find( my_photo_id )
     for doc in cursor:
         face_time = doc['accumulateViewersPerDay']
-    
+
+    # init bridge ip
+    cursor_ip = config.find( {'id':1} )
+    for doc in cursor_ip:
+        ip = doc['bridgeIP']
+        
     prev_faces = 0
     prev_power = 0
     sound_time = 0
@@ -51,6 +57,10 @@ def main():
                 # Read the image
                 (rval,image) = cap.read()
                 if not rval :
+                    cap.release()
+                    cap = cv2.VideoCapture(0)
+                    cap.set(3, 320)
+                    cap.set(4, 240)
                     print("Failed to open webcam. Trying again...")
 
             gray = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
@@ -65,7 +75,7 @@ def main():
                 )
         
             # call light func with the photo's properties
-            ( prev_faces, prev_power ) = light.change_light(prev_faces,len(faces),prev_power)
+            ( prev_faces, prev_power ) = light.change_light(prev_faces,len(faces),prev_power, ip)
             simulation.update(my_photo_id, {'$set': {'currentLightning': prev_power}})
             
         
@@ -94,7 +104,7 @@ def main():
 
             # calibrate if overflow      
             if volum > max_volum :
-                volum = max_voum
+                volum = max_volum
             if volum < min_volum :
                 volum = min_volum
         
