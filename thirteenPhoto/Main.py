@@ -1,6 +1,5 @@
-
+import urllib.request, json
 import sys
-
 import cv2
 import pygame
 import pymongo
@@ -12,9 +11,20 @@ def main():
     CASC_PATH = "haarcascade_frontalface_default.xml"
     URI = 'mongodb://net_photo:net.photo456@ds139322.mlab.com:39322/net_photographs'
     
+    while True:
+        try:
+            # read bridge ip from web
+            with urllib.request.urlopen(r"https://www.meethue.com/api/nupnp") as url:
+                data = json.loads(url.read().decode())
+                ip = data[0]['internalipaddress']
+                break
+        except urllib.error.URLError as e:
+            print(e)
+
     client = pymongo.MongoClient(URI)
     db = client['net_photographs']
     simulation = db.sessions
+    config = db.config
     my_photo_id = {'photoID': 13}
     my_friend_id = {'photoID': 3}
     
@@ -34,6 +44,9 @@ def main():
     for doc in cursor:
         face_time = doc['accumulateViewersPerDay']
     
+    # update bridge ip
+    config.update({'id': 1}, {'$set': {'bridgeIP': ip}})
+
     prev_faces = 0
     prev_power = 0
     sound_time = 0
@@ -54,6 +67,11 @@ def main():
                 (rval,image) = cap.read()
                 if not rval :
                     print("Failed to open webcam. Trying again...")
+                    cap.release()
+                    cap = cv2.VideoCapture(0)
+                    cap.set(3, 320)
+                    cap.set(4, 240)
+
 
             gray = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
 
@@ -70,7 +88,7 @@ def main():
             for doc in cursor_friend:
                 friend_faces = doc['currentViewers']
             # call light func with the photo's properties
-            ( prev_faces, prev_power ) = light.change_light(prev_faces,( len(faces) + (friend_faces*0.2) ),prev_power)
+            ( prev_faces, prev_power ) = light.change_light(prev_faces,( len(faces) + (friend_faces*0.2) ),prev_power, ip)
             simulation.update(my_photo_id, {'$set': {'currentLightning': prev_power}})
             
         
@@ -99,7 +117,7 @@ def main():
 
             # calibrate if overflow      
             if volum > max_volum :
-                volum = max_voum
+                volum = max_volum
             if volum < min_volum :
                 volum = min_volum
         
