@@ -1,17 +1,12 @@
 
 import sys
-import urllib.request, json
 import phue
 
 import cv2
 from phue import Bridge
 
-# read bridge ip from web
-with urllib.request.urlopen(r"https://www.meethue.com/api/nupnp") as url:
-    data = json.loads(url.read().decode())
-    ip = data[0]['internalipaddress']
 
-def change_light( prev_faces, curr, prev_power):
+def change_light( prev_faces, curr, prev_power, ip):
       
     # photo attributes
     JUMP = 53
@@ -52,7 +47,7 @@ def change_light( prev_faces, curr, prev_power):
 
     # change light power
     b.set_light(light_id, 'bri', int(power))
-
+    print(power)
     prev_power = power
     prev_faces = curr
     
