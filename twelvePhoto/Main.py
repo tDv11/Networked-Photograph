@@ -1,7 +1,6 @@
 
 import sys
 
-import urllib.request, json
 import cv2
 import pygame
 import pymongo
