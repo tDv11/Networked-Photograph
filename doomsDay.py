@@ -3,17 +3,12 @@ import sys
 import cv2
 
 def uponUs():
-    cap.release()
-    
+    print('DoomsDay as started :( ')
     CASC_PATH = "haarcascade_frontalface_default.xml"
-
-    min_volum = volum = 0.05
-    max_volum = 1.0
-    volum_jump = 0.16
 
     cap = cv2.VideoCapture(0)
     cap.set(3, 320)
-    cap.set(4, 240)
+    cap.set(4, 240) 
 
     pygame.mixer.init()
     pygame.mixer.music.load("8 Dostoevsky.mp3")
@@ -51,17 +46,11 @@ def uponUs():
                 if pygame.mixer.music.get_busy() == 0 :
                     pygame.mixer.music.play()
                     
-            # calculate volume power
-            volum = len(faces) * volum_jump
-            if volum > max_volum :
-                volum = max_volum
-            if volum < min_volum :
-                volum = min_volum
             
-            pygame.mixer.music.set_volume(volum)
+            pygame.mixer.music.set_volume(0.7)
             
     except KeyboardInterrupt:
-        break
+        pass
     
         cap.release()
 
