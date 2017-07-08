@@ -1,18 +1,19 @@
 
 import sys
 
+import http
 import cv2
 import pygame
 import pymongo
+import time
 
 import light
 import log
-import time
+import doomsDay
 
 def main():
     try:
-        
-        time.sleep(45)
+        #time.sleep(80)
         CASC_PATH = "haarcascade_frontalface_default.xml"
         URI = 'mongodb://net_photo:net.photo456@ds139322.mlab.com:39322/net_photographs'
     
@@ -20,8 +21,8 @@ def main():
         db = client['net_photographs']
         simulation = db.sessions
         config = db.config
-        my_photo_id = {'photoID': 2}
-    
+        my_photo_id = {'photoID': 8}
+        my_friend_id = {'photoID': 2}
 
         my_file = open("log.txt", "w")  
 
@@ -30,7 +31,7 @@ def main():
         cap.set(4, 240)
 
         pygame.mixer.init()
-        pygame.mixer.music.load("2 blonde.mp3")
+        pygame.mixer.music.load("8 Dostoevsky.mp3")
 
         face_time = 0
         # init face_time from DB
@@ -42,14 +43,15 @@ def main():
         cursor_ip = config.find( {'id':1} )
         for doc in cursor_ip:
             ip = doc['bridgeIP']
-    
+        
         prev_faces = 0
         prev_power = 0
         sound_time = 0
+        my_friend_faces = 0
 
         min_volum = volum = 0.05
         max_volum = 1.0
-        volum_jump = 0.33
+        volum_jump = 0.16
         try:
             while True:
                 # Create the haar cascade xml file
@@ -78,8 +80,14 @@ def main():
                 # flags = cv2.CV_HAAR_SCALE_IMAGE
                     )
         
+
+                cursor_friend = simulation.find( my_friend_id )
+                for doc in cursor_friend:
+                    my_friend_faces = doc['currentViewers']
+            
                 # call light func with the photo's properties
-                ( prev_faces, prev_power ) = light.change_light(prev_faces,len(faces),prev_power,ip)
+                ( prev_faces, prev_power ) = light.change_light(prev_faces,(len(faces)+(my_friend_faces/2)) ,prev_power,ip)
+            
                 simulation.update(my_photo_id, {'$set': {'currentLightning': prev_power}})
             
         
@@ -121,21 +129,17 @@ def main():
     
         except KeyboardInterrupt:
             pass
-
-
+        
     except Exception as e:
         print(e)
         cap.release()
         doomsDay.uponUs()
-    
-            
+
+
     client.close()
     cv2.destroyAllWindows()
     cap.release()
     my_file.close()
-                    
-        
 
-    
 if __name__ == '__main__':
     main()

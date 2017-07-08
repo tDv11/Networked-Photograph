@@ -1,4 +1,3 @@
-
 import sys
 import phue
 
@@ -9,11 +8,12 @@ from phue import Bridge
 def change_light( prev_faces, curr, prev_power, ip):
       
     # photo attributes
-    JUMP = 24
+    JUMP = 38
     max_power = 254  
     min_power = 51
     light_id = 8
     
+
     
     # philips hue light connection
     while True:
