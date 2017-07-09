@@ -52,7 +52,11 @@ def uponUs():
                 if pygame.mixer.music.get_busy() == 0 :
                     pygame.mixer.music.play()
                     
-            
+            # calibrate if overflow      
+            if volum > max_volum :
+                volum = max_volum
+            if volum < min_volum :
+                volum = min_volum
             pygame.mixer.music.set_volume(volum)
             
     except KeyboardInterrupt:
