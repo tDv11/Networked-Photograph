@@ -91,8 +91,10 @@ def main():
                 # call light func with the photo's properties
                 ( prev_faces, prev_power ) = light.change_light(prev_faces,( len(faces) + (friend_faces*0.2) ),prev_power, ip)
                 simulation.update(my_photo_id, {'$set': {'currentLightning': prev_power}})
+                # update curr faces on db
+                simulation.update(my_photo_id, {'$set': {'currentViewers': len(faces)}})
             
-        
+            
                 # to do if there are ppl
                 if len(faces) > 0 :
                     face_time += len(faces)
@@ -100,8 +102,7 @@ def main():
                     if pygame.mixer.music.get_busy() == 0 :
                         pygame.mixer.music.play()
            
-                    # update curr faces on db + inc FaceTime but the curr faces
-                    simulation.update(my_photo_id, {'$set': {'currentViewers': len(faces)}})
+                    # inc FaceTime & update
                     simulation.update(my_photo_id, {'$set': {'accumulateViewersPerDay': face_time}})
                 
             
@@ -137,8 +138,8 @@ def main():
         print(e)
         cap.release()
         doomsDay.uponUs()
-    
 
+        
     client.close()
     cv2.destroyAllWindows()
     cap.release()
@@ -146,6 +147,6 @@ def main():
                     
         
 
-    
+
 if __name__ == '__main__':
     main()

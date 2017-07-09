@@ -1,5 +1,6 @@
-import urllib.request, json
+
 import sys
+
 import cv2
 import pygame
 import pymongo
@@ -11,16 +12,6 @@ def main():
     CASC_PATH = "haarcascade_frontalface_default.xml"
     URI = 'mongodb://net_photo:net.photo456@ds139322.mlab.com:39322/net_photographs'
     
-    while True:
-        try:
-            # read bridge ip from web
-            with urllib.request.urlopen(r"https://www.meethue.com/api/nupnp") as url:
-                data = json.loads(url.read().decode())
-                ip = data[0]['internalipaddress']
-                break
-        except urllib.error.URLError as e:
-            print(e)
-
     client = pymongo.MongoClient(URI)
     db = client['net_photographs']
     simulation = db.sessions
@@ -43,18 +34,19 @@ def main():
     cursor = simulation.find( my_photo_id )
     for doc in cursor:
         face_time = doc['accumulateViewersPerDay']
-    
-    # update bridge ip
-    config.update({'id': 1}, {'$set': {'bridgeIP': ip}})
 
+    # init bridge ip
+    cursor_ip = config.find( {'id':1} )
+    for doc in cursor_ip:
+        ip = doc['bridgeIP']
+        
     prev_faces = 0
     prev_power = 0
     sound_time = 0
-    friend_faces = 0
 
     min_volum = volum = 0.05
     max_volum = 1.0
-    volum_jump = 0.16
+    volum_jump = 0.23
     try:
         while True:
             # Create the haar cascade xml file
@@ -66,12 +58,11 @@ def main():
                 # Read the image
                 (rval,image) = cap.read()
                 if not rval :
-                    print("Failed to open webcam. Trying again...")
                     cap.release()
                     cap = cv2.VideoCapture(0)
                     cap.set(3, 320)
                     cap.set(4, 240)
-
+                    print("Failed to open webcam. Trying again...")
 
             gray = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
 
