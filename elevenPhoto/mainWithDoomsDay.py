@@ -13,7 +13,7 @@ import doomsDay
 def main():
     try:
         
-        time.sleep(85)
+        #time.sleep(85)
         CASC_PATH = "haarcascade_frontalface_default.xml"
         URI = 'mongodb://net_photo:net.photo456@ds139322.mlab.com:39322/net_photographs'
     
@@ -82,6 +82,8 @@ def main():
                 # call light func with the photo's properties
                 ( prev_faces, prev_power ) = light.change_light(prev_faces,len(faces),prev_power, ip)
                 simulation.update(my_photo_id, {'$set': {'currentLightning': prev_power}})
+                # update curr faces on db
+                simulation.update(my_photo_id, {'$set': {'currentViewers': len(faces)}})
             
         
                 # to do if there are ppl
@@ -91,8 +93,7 @@ def main():
                     if pygame.mixer.music.get_busy() == 0 :
                         pygame.mixer.music.play()
            
-                    # update curr faces on db + inc FaceTime but the curr faces
-                    simulation.update(my_photo_id, {'$set': {'currentViewers': len(faces)}})
+                    # inc FaceTime & update
                     simulation.update(my_photo_id, {'$set': {'accumulateViewersPerDay': face_time}})
                 
             
