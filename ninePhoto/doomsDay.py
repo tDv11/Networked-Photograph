@@ -11,7 +11,8 @@ def uponUs():
     cap.set(4, 240) 
 
     pygame.mixer.init()
-    pygame.mixer.music.load("10 mission.mp3")
+    pygame.mixer.music.load("9 very well thank you.mp3")
+    
     min_volum = volum = 0.05
     max_volum = 1.0
     volum_jump = 0.23
@@ -45,19 +46,14 @@ def uponUs():
                 )
              # to do if there are ppl
             if len(faces) > 0 :
-                volum = volum_jump * len(faces)
+                # calculate volume power
+                volum = len(faces) * volum_jump
                 # if no recording is on, play
                 if pygame.mixer.music.get_busy() == 0 :
                     pygame.mixer.music.play()
                     
-            # calibrate if overflow      
-            if volum > max_volum :
-                volum = max_volum
-            if volum < min_volum :
-                volum = min_volum   
             
             pygame.mixer.music.set_volume(volum)
-            print(volum)
             
     except KeyboardInterrupt:
         pass
