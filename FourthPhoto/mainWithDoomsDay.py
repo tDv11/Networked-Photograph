@@ -8,11 +8,12 @@ import pymongo
 import light
 import log
 import time
+import doomsDay
 
 def main():
     try:
         
-        time.sleep(55)
+        #time.sleep(55)
         CASC_PATH = "haarcascade_frontalface_default.xml"
         URI = 'mongodb://net_photo:net.photo456@ds139322.mlab.com:39322/net_photographs'
     
