@@ -9,4 +9,4 @@ Software Engineering B.Sc. Final Project
 
 Read more : https://github.com/tDv11/Networked-Photograph/blob/master/The%20Networked%20Photograph%20Poster.pdf
 
-[here](Networked-Photograph/The Networked Photograph Poster.pdf)
+[here](The%20Networked%20Photograph%20Poster.pdf)
