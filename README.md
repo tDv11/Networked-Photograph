@@ -7,3 +7,6 @@ Software Engineering B.Sc. Final Project
 
 מנחה: צילה חסין
 
+Read more : https://github.com/tDv11/Networked-Photograph/blob/master/The%20Networked%20Photograph%20Poster.pdf
+
+[this subsubtext](subpro/subsubpro/subsubtext.md)
